@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#56CFEC</color>
+    <color name="colorPrimaryDark">#56CFEC</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="seaLord_start">#56CFEC</color>
+    <color name="seaLord_center">#B7C2FF</color>
+    <color name="seaLord_end">#EDC0EA</color>
+</resources>
