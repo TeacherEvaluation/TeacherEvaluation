@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         ll1 = findViewById(R.id.first_main);
         ll2 = findViewById(R.id.second_main);
         ll3 = findViewById(R.id.third_main);
+        
     }
 
     @Override
