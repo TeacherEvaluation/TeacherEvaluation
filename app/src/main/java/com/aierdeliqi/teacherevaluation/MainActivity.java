@@ -29,30 +29,30 @@ public class MainActivity extends AppCompatActivity
     LinearLayout ll1,ll2,ll3;
 
     public void find(){
-        floatingActionMenu = (FloatingActionMenu)findViewById(R.id.fam);
-        floatingActionButton_increase = (FloatingActionButton)findViewById(R.id.fab_1);
-        bottomNavigationBar = (BottomNavigationBar)findViewById(R.id.bottom_navigation_bar);
+        floatingActionMenu = findViewById(R.id.fam);
+        floatingActionButton_increase = findViewById(R.id.fab_1);
+        bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
 
-        ll1 = (LinearLayout)findViewById(R.id.first_main);
-        ll2 = (LinearLayout)findViewById(R.id.second_main);
-        ll3 = (LinearLayout)findViewById(R.id.third_main);
+        ll1 = findViewById(R.id.first_main);
+        ll2 = findViewById(R.id.second_main);
+        ll3 = findViewById(R.id.third_main);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         find();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //bottom navigation bar
@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity
                 .setText("2")
                 .setHideOnSelect(true);
 
-        BottomNavigationItem item1 = new BottomNavigationItem(R.drawable.ic_menu_camera,"first")
-                .setActiveColorResource(R.color.seaLord_start)
-                .setBadgeItem(badgeItem);
-        BottomNavigationItem item2 = new BottomNavigationItem(R.drawable.ic_menu_gallery,"second")
+        BottomNavigationItem item1 = new BottomNavigationItem(R.drawable.ic_nav_first,"消息")
+                .setActiveColorResource(R.color.seaLord_start);
+//                .setBadgeItem(badgeItem);
+        BottomNavigationItem item2 = new BottomNavigationItem(R.drawable.ic_nav_second,"评价")
                 .setActiveColorResource(R.color.seaLord_center);
-        BottomNavigationItem item3 = new BottomNavigationItem(R.drawable.ic_menu_send,"third")
+        BottomNavigationItem item3 = new BottomNavigationItem(R.drawable.ic_nav_third,"排名")
                 .setActiveColorResource(R.color.seaLord_end);
 
         bottomNavigationBar.clearAll();
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
