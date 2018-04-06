@@ -1,9 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="      您的信息"
+        android:gravity="fill_vertical"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:elevation="2dp"
+        android:background="@drawable/title2back"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hello 2"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/info_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="姓名：name"
+            android:background="@drawable/card6"
+            android:textSize="20dp"
+            android:elevation="1dp"
+            android:padding="10dp"/>
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/info_sex"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="性别：男"
+            android:background="@drawable/card5"
+            android:textSize="20dp"
+            android:elevation="1dp"
+            android:padding="10dp"/>
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/info_age"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="年龄：24岁"
+            android:background="@drawable/card3"
+            android:textSize="20dp"
+            android:elevation="1dp"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/info_zhuanye"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="专业：计算机"
+            android:background="@drawable/card2"
+            android:textSize="20dp"
+            android:elevation="1dp"
+            android:padding="10dp"/>
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/info_class"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="班级：150x"
+            android:background="@drawable/card1"
+            android:textSize="20dp"
+            android:elevation="1dp"
+            android:padding="10dp"/>
+    </LinearLayout>
+    <TextView
+        android:layout_margin="5dp"
+        android:id="@+id/info_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="学号：xxxxxxxxxxxx"
+        android:background="@drawable/card4"
+        android:textSize="20dp"
+        android:elevation="1dp"
+        android:textColor="@color/white"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/select"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="      您的课程"
+        android:gravity="fill_vertical"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:elevation="2dp"
+        android:background="@drawable/title2back"/>
+
 </LinearLayout>

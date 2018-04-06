@@ -6,4 +6,18 @@
     <color name="seaLord_start">#56CFEC</color>
     <color name="seaLord_center">#B7C2FF</color>
     <color name="seaLord_end">#EDC0EA</color>
+    <color name="white">#ffffff</color>
+    <color name="touming">#000000ff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#939393</color>
+    <color name="lightblue">#29d2e5</color>
+    <color name="lightpink">#eac3f8</color>
+    <color name="lemonyellow">#f9f586</color>
+    <color name="lemontgreen">#96fbc4</color>
+    <color name="fruitblendyellow">#f9d423</color>
+    <color name="fruitblendorange">#ff4e50</color>
+    <color name="blacksea1">#42bfd5</color>
+    <color name="blacksea2">#8253da</color>
+    <color name="summergamesgreen">#92fe9d</color>
+    <color name="summergamesblue">#00c9ff</color>
 </resources>
