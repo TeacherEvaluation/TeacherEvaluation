@@ -3,36 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.youth.banner.Banner
-        android:elevation="4dp"
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="250dp">
-    </com.youth.banner.Banner>
 
-    <TextView
-        android:id="@+id/news"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="      最新消息"
-        android:gravity="fill_vertical"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/banner"
-        android:elevation="1dp"
-        android:background="@drawable/titleback"/>
+    <!--<com.youth.banner.Banner-->
+    <!--android:elevation="4dp"-->
+    <!--android:id="@+id/banner"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="250dp">-->
+    <!--</com.youth.banner.Banner>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/news"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:text="      最新消息"-->
+    <!--android:gravity="fill_vertical"-->
+    <!--android:textSize="20sp"-->
+    <!--android:textColor="@color/white"-->
+    <!--app:layout_constraintTop_toBottomOf="@id/banner"-->
+    <!--android:elevation="1dp"-->
+    <!--android:background="@drawable/titleback"/>-->
 
 
-    <ListView
-        app:layout_constraintTop_toBottomOf="@id/news"
-        android:id="@+id/lv"
+    <!--app:layout_constraintTop_toBottomOf="@id/news"-->
+    <android.support.v4.widget.SwipeRefreshLayout
+
+        android:id="@+id/swiptorefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="20dp"
-        android:paddingTop="10dp"
-        android:divider="@color/touming"
-        android:dividerHeight="10dp"/>
+        android:layout_height="wrap_content">
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:divider="@color/touming"
+            android:dividerHeight="10dp"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -24,23 +24,38 @@
 
     <com.github.clans.fab.FloatingActionMenu
         android:layout_marginBottom="70dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/fam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         app:menu_openDirection="up"
-        app:menu_colorNormal="@color/seaLord_start"
-        app:menu_colorPressed="@color/seaLord_end"
-        app:menu_colorRipple="@color/seaLord_center">
+        app:menu_colorNormal="@color/seaLord_start">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_size="mini"
-            app:fab_label="添加"
+            app:fab_label="func1"
             android:src="@drawable/ic_menu_camera"
-            app:fab_colorNormal="@color/seaLord_center"/>
+            app:fab_colorNormal="@color/seaLord_start"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="func2"
+            android:src="@drawable/ic_menu_camera"
+            app:fab_colorNormal="@color/seaLord_start"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="func3"
+            android:src="@drawable/ic_menu_camera"
+            app:fab_colorNormal="@color/seaLord_start"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

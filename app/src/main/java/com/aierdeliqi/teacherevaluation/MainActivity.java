@@ -1,18 +1,26 @@
 package com.aierdeliqi.teacherevaluation;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -23,35 +31,59 @@ import com.youth.banner.Banner;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationBar.OnTabSelectedListener {
-    FloatingActionMenu floatingActionMenu;
-    FloatingActionButton floatingActionButton_increase;
+        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationBar.OnTabSelectedListener ,FloatingActionButton.OnClickListener{
+    FloatingActionMenu fm;
+    FloatingActionButton fb_1, fb_2, fb_3;
     BottomNavigationBar bottomNavigationBar;
     Banner banner;
+    SwipeRefreshLayout swipeRefresh, swipeRefresh2,swipeRefresh3;
 
     //main_view
     LinearLayout ll1, ll2, ll3;
 
-    ListView lv;
-    private String[] name1 = new String[]{"学生1", "学生2", "学生3", "学生4", "学生3", "学生3", "学生3", "学生3", "学生3"};
-    private String[] teacher = new String[]{"教师1", "教师2", "教师3", "教师4", "教师2", "教师2", "教师2", "教师2", "教师2"};
-    private String[] times = new String[]{"10分钟前", "12分钟前", "13分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前"};
-    private LinkedList<Talks> mData = null;
+    ListView lv,lv_course,lv_search;
+    private LinkedList<Talks> mDataNews = null;
+    private LinkedList<Coruse> mDataCourse = null;
     private Context context;
     private TalkAdapter talkAdapter = null;
+    private CourseAdapter courseAdapter = null;
+
+    TextView info_name, info_sex, info_age, info_zhuanye, info_classes, info_num;
 
     public void find() {
-        floatingActionMenu = findViewById(R.id.fam);
-        floatingActionButton_increase = findViewById(R.id.fab_1);
+        fm = findViewById(R.id.fam);
+        fb_1 = findViewById(R.id.fab_1);
+        fb_2 = findViewById(R.id.fab_2);
+        fb_3 = findViewById(R.id.fab_3);
+        fm.setClosedOnTouchOutside(true);
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
 
         ll1 = findViewById(R.id.first_main);
         ll2 = findViewById(R.id.second_main);
         ll3 = findViewById(R.id.third_main);
 
-        banner = findViewById(R.id.banner);
+        lv = findViewById(R.id.lv);
+        lv_course = findViewById(R.id.lv_coruse);
+        lv_search = findViewById(R.id.lv_search);
+
+//        View view = getLayoutInflater().inflate(R.layout.first_header, null);
+//        banner = view.findViewById(R.id.banner);
+//        banner = findViewById(R.id.banner);
+        swipeRefresh = findViewById(R.id.swiptorefresh);
+        swipeRefresh2 = findViewById(R.id.swiptorefresh_2);
+        swipeRefresh3 = findViewById(R.id.swipe_search);
+
+        View view = getLayoutInflater().inflate(R.layout.second_header, null);
+        info_age = view.findViewById(R.id.info_age);
+        info_classes = view.findViewById(R.id.info_classes);
+        info_name = view.findViewById(R.id.info_name);
+        info_sex = view.findViewById(R.id.info_sex);
+        info_zhuanye = view.findViewById(R.id.info_zhuanye);
+        info_num = view.findViewById(R.id.info_num);
+
     }
 
     @Override
@@ -95,22 +127,89 @@ public class MainActivity extends AppCompatActivity
                 .initialise();
         bottomNavigationBar.setTabSelectedListener(this);
 
+//        First页开始
+        //news
+        context = MainActivity.this;
+        //加载头部
+        final LayoutInflater inflater = LayoutInflater.from(this);
+        View headViewNews = inflater.inflate(R.layout.first_header, null, false);
+        lv.addHeaderView(headViewNews);
         //轮播图
+        banner = headViewNews.findViewById(R.id.banner);
         Integer[] images = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
         banner.setImages(Arrays.asList(images))
                 .setImageLoader(new GlideImageLoader())
                 .setDelayTime(4000)
                 .start();
-
-        //news
-        context = MainActivity.this;
-        lv = findViewById(R.id.lv);
-        mData = new LinkedList<Talks>();
+        //加载链表
+        String[] name1 = new String[]{"学生1", "学生2", "学生3", "学生4", "学生3", "学生3", "学生3", "学生3", "学生3"};
+        String[] teacher = new String[]{"教师1", "教师2", "教师3", "教师4", "教师2", "教师2", "教师2", "教师2", "教师2"};
+        String[] times = new String[]{"10分钟前", "12分钟前", "13分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前"};
+        mDataNews = new LinkedList<>();
         for (int i = 0; i < name1.length; i++) {
-            mData.add(new Talks(name1[i], teacher[i], times[i]));
+            mDataNews.add(new Talks(name1[i], teacher[i], times[i]));
         }
-        talkAdapter = new TalkAdapter(mData,context);
+        talkAdapter = new TalkAdapter(mDataNews, context);
+
+        //载入布局
+
         lv.setAdapter(talkAdapter);
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "News刷新完成", Toast.LENGTH_SHORT).show();
+                        swipeRefresh.setRefreshing(false);
+                    }
+                }, 2000);
+            }
+        });
+//        First页结束
+
+
+//        Second页开始
+        String[] teacherName = new String[]{"赵老师", "钱老师", "孙老师", "李老师", "周老师", "吴老师", "郑老师", "王老师"};
+        String[] courseName = new String[]{"高数", "英语", "大物", "程序设计", "数据结构", "数据库", "网络原理", "软件管理"};
+        mDataCourse = new LinkedList<>();
+        for (int i = 0; i < teacherName.length; i++) {
+            mDataCourse.add(new Coruse(courseName[i], teacherName[i]));
+        }
+        courseAdapter = new CourseAdapter(mDataCourse, context);
+        View headViewCourse = inflater.inflate(R.layout.second_header, null, false);
+        info_age = headViewCourse.findViewById(R.id.info_age);
+        info_classes = headViewCourse.findViewById(R.id.info_classes);
+        info_name = headViewCourse.findViewById(R.id.info_name);
+        info_sex = headViewCourse.findViewById(R.id.info_sex);
+        info_zhuanye = headViewCourse.findViewById(R.id.info_zhuanye);
+        info_num = headViewCourse.findViewById(R.id.info_num);
+        lv_course.addHeaderView(headViewCourse);
+        lv_course.setAdapter(courseAdapter);
+
+        swipeRefresh2.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "评价信息刷新完成", Toast.LENGTH_SHORT).show();
+                        swipeRefresh2.setRefreshing(false);
+                    }
+                }, 2000);
+            }
+        });
+//        Second页结束
+
+//        Third页开始
+        
+//        Third页结束
+
+        //浮动按钮
+        fb_1.setOnClickListener(this);
+        fb_2.setOnClickListener(this);
+        fb_3.setOnClickListener(this);
     }
 
     @Override
@@ -145,6 +244,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //侧边Drawer
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -170,31 +270,83 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //切换页面视图
+    public void inVisiable() {
+        ll1.setVisibility(View.INVISIBLE);
+        ll2.setVisibility(View.INVISIBLE);
+        ll3.setVisibility(View.INVISIBLE);
+    }
+
+    //页面出现效果
     public void isVisiable(int i) {
         if (i == 0) {
+            inVisiable();
             ll1.setVisibility(View.VISIBLE);
-            ll2.setVisibility(View.INVISIBLE);
-            ll3.setVisibility(View.INVISIBLE);
+            fm.setMenuButtonColorNormalResId(R.color.seaLord_start);
+            fb_1.setColorNormalResId(R.color.seaLord_start);
+            fb_2.setColorNormalResId(R.color.seaLord_start);
+            fb_3.setColorNormalResId(R.color.seaLord_start);
         } else if (i == 1) {
-            ll1.setVisibility(View.INVISIBLE);
+            inVisiable();
             ll2.setVisibility(View.VISIBLE);
-            ll3.setVisibility(View.INVISIBLE);
+            fm.setMenuButtonColorNormalResId(R.color.seaLord_center);
+            fb_1.setColorNormalResId(R.color.seaLord_center);
+            fb_2.setColorNormalResId(R.color.seaLord_center);
+            fb_3.setColorNormalResId(R.color.seaLord_center);
         } else {
-            ll1.setVisibility(View.INVISIBLE);
-            ll2.setVisibility(View.INVISIBLE);
+            inVisiable();
             ll3.setVisibility(View.VISIBLE);
+            fm.setMenuButtonColorNormalResId(R.color.seaLord_end);
+            fb_1.setColorNormalResId(R.color.seaLord_end);
+            fb_2.setColorNormalResId(R.color.seaLord_end);
+            fb_3.setColorNormalResId(R.color.seaLord_end);
         }
     }
 
+    //FloatingMenu&Button动画
+    public void showAnime(View view) {
+        ObjectAnimator firstShow, secondShow, fmShow, fm2Show;
+        firstShow = ObjectAnimator.ofFloat(view, "translationY", 100, 0).setDuration(500);
+        secondShow = ObjectAnimator.ofFloat(view, "alpha", 0, 1).setDuration(500);
+        fmShow = ObjectAnimator.ofFloat(fm, "translationY", 100, 0).setDuration(500);
+        fm2Show = ObjectAnimator.ofFloat(fm, "alpha", 0, 1).setDuration(500);
+        fmShow.setInterpolator(new OvershootInterpolator());
+        firstShow.setInterpolator(new DecelerateInterpolator(2f));
+        firstShow.start();
+        secondShow.start();
+        fm2Show.start();
+        fmShow.start();
+    }
+
+    //信息展示动画
+    public void infoAnime(View view){
+        Random random = new Random();
+        int rand = random.nextInt(900)+400;
+        ObjectAnimator animator,animator1;
+        animator = ObjectAnimator.ofFloat(view, "scaleX", 0.2f,1).setDuration(rand);
+        animator1 = ObjectAnimator.ofFloat(view, "scaleY", 0.2f,1).setDuration(rand);
+        animator.setInterpolator(new DecelerateInterpolator(2f));
+        animator1.setInterpolator(new DecelerateInterpolator(2f));
+        animator.start();
+        animator1.start();
+    }
+
+    //BottomNavigation切换
     @Override
     public void onTabSelected(int position) {
         isVisiable(position);
         if (position == 0) {
-
+            showAnime(ll1);
         } else if (position == 1) {
-
+            showAnime(ll2);
+            infoAnime(info_name);
+            infoAnime(info_sex);
+            infoAnime(info_age);
+            infoAnime(info_zhuanye);
+            infoAnime(info_classes);
+            infoAnime(info_num);
         } else {
-
+            showAnime(ll3);
         }
 
     }
@@ -205,5 +357,28 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onTabReselected(int position) {
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(this, view.getId()+"", Toast.LENGTH_SHORT).show();
+        switch (view.getId()){
+            case R.id.fab_1:
+                infoAnime(info_name);
+                infoAnime(info_sex);
+                infoAnime(info_age);
+                infoAnime(info_zhuanye);
+                infoAnime(info_classes);
+                infoAnime(info_num);
+                fm.close(true);
+                break;
+            case R.id.fab_2:
+
+                break;
+            case R.id.fab_3:
+
+                break;
+
+        }
     }
 }

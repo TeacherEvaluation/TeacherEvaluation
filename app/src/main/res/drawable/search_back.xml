@@ -2,6 +2,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners
         android:radius="7dp"/>
+
     <solid
-        android:color="@color/summergamesblue"/>
+        android:color="@color/touming"/>
+    <stroke
+        android:color="@color/seaLord_end"
+        android:width="2dp"/>
+
+
 </shape>

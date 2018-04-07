@@ -3,5 +3,5 @@
     <corners
         android:radius="7dp"/>
     <solid
-        android:color="@color/summergamesblue"/>
+        android:color="@color/fruitblendorange"/>
 </shape>

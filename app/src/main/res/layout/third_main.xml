@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <SearchView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hello 3"/>
+        android:background="@drawable/search_back"
+        android:layout_margin="10dp"
+        android:elevation="2dp"
+        android:closeIcon="@drawable/ic_close"
+        android:commitIcon="@drawable/ic_go">
+    </SearchView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp">
+        <ListView
+            android:id="@+id/lv_search"
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

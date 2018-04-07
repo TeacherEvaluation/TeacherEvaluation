@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.youth.banner.Banner
+        android:elevation="4dp"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/seaLord_start">
+    </com.youth.banner.Banner>
+
+    <TextView
+        android:id="@+id/news"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="      最新消息"
+        android:gravity="fill_vertical"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:elevation="1dp"
+        android:background="@drawable/titleback"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下拉刷新"
+        android:gravity="center"/>
+</LinearLayout>

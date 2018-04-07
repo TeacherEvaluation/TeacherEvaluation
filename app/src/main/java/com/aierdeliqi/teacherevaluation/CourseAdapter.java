@@ -5,22 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 
-public class TalkAdapter extends BaseAdapter {
-    private LinkedList<Talks> mData;
-    private Context mContex;
-
-    public TalkAdapter(LinkedList<Talks> mData, Context mContext) {
-        this.mContex = mContext;
+public class CourseAdapter extends BaseAdapter{
+    private LinkedList<Coruse> mData;
+    private Context mContext;
+    public CourseAdapter(LinkedList<Coruse> mData,Context mContext){
+        this.mContext = mContext;
         this.mData = mData;
     }
-
     @Override
     public int getCount() {
         return mData.size();
@@ -40,26 +35,22 @@ public class TalkAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (view == null){
-            view = LayoutInflater.from(mContex).inflate(R.layout.list_item, viewGroup, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.list_course,viewGroup,false);
             holder = new ViewHolder();
-            holder.tv_name1 = view.findViewById(R.id.tv_name1);
-            holder.tv_teacher = view.findViewById(R.id.tv_teacher);
-            holder.tv_time = view.findViewById(R.id.tv_time);
+            holder.tv_coursename = view.findViewById(R.id.tv_coursename);
+            holder.tv_teachername = view.findViewById(R.id.tv_teachername);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
         }
-
-        holder.tv_name1.setText(mData.get(i).getSpeaker());
-        holder.tv_teacher.setText(mData.get(i).getTeacher());
-        holder.tv_time.setText(mData.get(i).getTimes());
+        holder.tv_teachername.setText(mData.get(i).getTeacherName());
+        holder.tv_coursename.setText(mData.get(i).getCoruseName());
         return view;
     }
 
     static class ViewHolder{
-        TextView tv_name1;
-        TextView tv_teacher;
-        TextView tv_time;
+        TextView tv_coursename;
+        TextView tv_teachername;
     }
 
 }
