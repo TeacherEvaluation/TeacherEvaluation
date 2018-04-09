@@ -7,4 +7,5 @@
     <string name="action_settings">设置</string>
     <string name="action_about">关于</string>
     <string name="action_exit">退出登陆</string>
+    <string name="noaccount">点此修改密码</string>
 </resources>

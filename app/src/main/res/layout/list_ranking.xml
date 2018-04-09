@@ -6,7 +6,9 @@
     android:orientation="vertical"
     android:background="@drawable/list_back2"
     android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:paddingTop="10dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,27 +18,21 @@
             android:layout_marginLeft="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_course" />
+            android:src="@drawable/ic_ranking" />
         <TextView
-            android:id="@+id/tv_teachername"
+            android:id="@+id/tv_rankteacher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xx老师"
-            android:textColor="@color/summergamesblue"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="的"/>
-        <TextView
-            android:id="@+id/tv_coursename"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="数据结构"
             android:textColor="@color/blacksea2"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_rankscore"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="课程"/>
+            android:gravity="right"
+            android:text="分数"
+            android:layout_marginRight="60dp"
+            android:textColor="@color/summergamesblue"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +44,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="前往评价"
+            android:text="查看详情"
             android:layout_marginRight="20dp"
             android:textColor="@color/seaLord_center"/>
     </LinearLayout>

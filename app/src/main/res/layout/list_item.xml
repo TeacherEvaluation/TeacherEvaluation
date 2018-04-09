@@ -48,7 +48,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="right"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="100dp"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/btn_up"

@@ -2,6 +2,7 @@ package com.aierdeliqi.teacherevaluation;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -203,7 +204,7 @@ public class MainActivity extends AppCompatActivity
 //        Second页结束
 
 //        Third页开始
-        
+
 //        Third页结束
 
         //浮动按钮
@@ -373,7 +374,8 @@ public class MainActivity extends AppCompatActivity
                 fm.close(true);
                 break;
             case R.id.fab_2:
-
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
                 break;
             case R.id.fab_3:
 

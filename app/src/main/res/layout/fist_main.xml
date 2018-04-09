@@ -1,30 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<com.youth.banner.Banner-->
-    <!--android:elevation="4dp"-->
-    <!--android:id="@+id/banner"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="250dp">-->
-    <!--</com.youth.banner.Banner>-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/news"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:text="      最新消息"-->
-    <!--android:gravity="fill_vertical"-->
-    <!--android:textSize="20sp"-->
-    <!--android:textColor="@color/white"-->
-    <!--app:layout_constraintTop_toBottomOf="@id/banner"-->
-    <!--android:elevation="1dp"-->
-    <!--android:background="@drawable/titleback"/>-->
-
-
-    <!--app:layout_constraintTop_toBottomOf="@id/news"-->
     <android.support.v4.widget.SwipeRefreshLayout
 
         android:id="@+id/swiptorefresh"
@@ -37,7 +15,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:divider="@color/touming"
-            android:dividerHeight="10dp"/>
+            android:dividerHeight="10dp"
+            android:paddingBottom="60dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
