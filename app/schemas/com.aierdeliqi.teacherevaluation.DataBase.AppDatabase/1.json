@@ -1,0 +1,872 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "dbfcf2191fcdcbe2a42c336c6a22a841",
+    "entities": [
+      {
+        "tableName": "course",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Student",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `specialize` INTEGER NOT NULL, `classes` INTEGER NOT NULL, `name` TEXT, `sex` TEXT, `password` TEXT, `age` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`specialize`) REFERENCES `Profession`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "specialize",
+            "columnName": "specialize",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "classes",
+            "columnName": "classes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "people.name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.sex",
+            "columnName": "sex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_Student_specialize",
+            "unique": true,
+            "columnNames": [
+              "specialize"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Student_specialize` ON `${TABLE_NAME}` (`specialize`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Profession",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "specialize"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "Profession",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Teacher",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `leader` INTEGER NOT NULL, `tg_id` INTEGER NOT NULL, `p_id` INTEGER NOT NULL, `name` TEXT, `sex` TEXT, `password` TEXT, `age` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`leader`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`tg_id`) REFERENCES `TeachingGroup`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`p_id`) REFERENCES `Profession`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "leader",
+            "columnName": "leader",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tg_id",
+            "columnName": "tg_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "p_id",
+            "columnName": "p_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "people.name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.sex",
+            "columnName": "sex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_Teacher_id",
+            "unique": true,
+            "columnNames": [
+              "id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Teacher_id` ON `${TABLE_NAME}` (`id`)"
+          },
+          {
+            "name": "index_Teacher_p_id",
+            "unique": true,
+            "columnNames": [
+              "p_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Teacher_p_id` ON `${TABLE_NAME}` (`p_id`)"
+          },
+          {
+            "name": "index_Teacher_leader",
+            "unique": true,
+            "columnNames": [
+              "leader"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Teacher_leader` ON `${TABLE_NAME}` (`leader`)"
+          },
+          {
+            "name": "index_Teacher_tg_id",
+            "unique": true,
+            "columnNames": [
+              "tg_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Teacher_tg_id` ON `${TABLE_NAME}` (`tg_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Teacher",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "leader"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "TeachingGroup",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "tg_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Profession",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "p_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "TeachingGroup",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "StudentEvaluation",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`s_id` INTEGER NOT NULL, `c_id` INTEGER NOT NULL, `t_id` INTEGER NOT NULL, `a_id` INTEGER NOT NULL, `semester` INTEGER NOT NULL, `evaluation_type` INTEGER NOT NULL, `content` REAL, `attitude` REAL, `methods` REAL, `status` REAL, `effect` REAL, `times` INTEGER, PRIMARY KEY(`s_id`, `c_id`, `t_id`, `a_id`, `semester`, `evaluation_type`), FOREIGN KEY(`s_id`) REFERENCES `Student`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`c_id`) REFERENCES `course`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`t_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`a_id`) REFERENCES `Academic`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`semester`) REFERENCES `Elective`(`semester`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "s_id",
+            "columnName": "s_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "c_id",
+            "columnName": "c_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "t_id",
+            "columnName": "t_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "a_id",
+            "columnName": "a_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "semester",
+            "columnName": "semester",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "evaluation_type",
+            "columnName": "evaluation_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "evaluation.content",
+            "columnName": "content",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.attitude",
+            "columnName": "attitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.methods",
+            "columnName": "methods",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.status",
+            "columnName": "status",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.effect",
+            "columnName": "effect",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.times",
+            "columnName": "times",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "s_id",
+            "c_id",
+            "t_id",
+            "a_id",
+            "semester",
+            "evaluation_type"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_StudentEvaluation_c_id",
+            "unique": true,
+            "columnNames": [
+              "c_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_StudentEvaluation_c_id` ON `${TABLE_NAME}` (`c_id`)"
+          },
+          {
+            "name": "index_StudentEvaluation_t_id",
+            "unique": true,
+            "columnNames": [
+              "t_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_StudentEvaluation_t_id` ON `${TABLE_NAME}` (`t_id`)"
+          },
+          {
+            "name": "index_StudentEvaluation_a_id",
+            "unique": true,
+            "columnNames": [
+              "a_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_StudentEvaluation_a_id` ON `${TABLE_NAME}` (`a_id`)"
+          },
+          {
+            "name": "index_StudentEvaluation_semester",
+            "unique": true,
+            "columnNames": [
+              "semester"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_StudentEvaluation_semester` ON `${TABLE_NAME}` (`semester`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Student",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "s_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "course",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "c_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Teacher",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "t_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Academic",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "a_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Elective",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "semester"
+            ],
+            "referencedColumns": [
+              "semester"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "Elective",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`s_id` INTEGER NOT NULL, `c_id` INTEGER NOT NULL, `t_id` INTEGER NOT NULL, `A_id` INTEGER NOT NULL, `semester` INTEGER NOT NULL, `score` INTEGER NOT NULL, PRIMARY KEY(`s_id`, `c_id`, `t_id`, `A_id`, `semester`), FOREIGN KEY(`t_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`s_id`) REFERENCES `Student`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`c_id`) REFERENCES `course`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "s_id",
+            "columnName": "s_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "c_id",
+            "columnName": "c_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "t_id",
+            "columnName": "t_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "A_id",
+            "columnName": "A_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "semester",
+            "columnName": "semester",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "score",
+            "columnName": "score",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "s_id",
+            "c_id",
+            "t_id",
+            "A_id",
+            "semester"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_Elective_t_id",
+            "unique": true,
+            "columnNames": [
+              "t_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Elective_t_id` ON `${TABLE_NAME}` (`t_id`)"
+          },
+          {
+            "name": "index_Elective_c_id",
+            "unique": true,
+            "columnNames": [
+              "c_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Elective_c_id` ON `${TABLE_NAME}` (`c_id`)"
+          },
+          {
+            "name": "index_Elective_A_id",
+            "unique": true,
+            "columnNames": [
+              "A_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Elective_A_id` ON `${TABLE_NAME}` (`A_id`)"
+          },
+          {
+            "name": "index_Elective_semester",
+            "unique": true,
+            "columnNames": [
+              "semester"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Elective_semester` ON `${TABLE_NAME}` (`semester`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Teacher",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "t_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Student",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "s_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "course",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "c_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "PeerReview",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tg_id` INTEGER NOT NULL, `ted_id` INTEGER NOT NULL, `ting_id` INTEGER NOT NULL, `content` REAL, `attitude` REAL, `methods` REAL, `status` REAL, `effect` REAL, `times` INTEGER, PRIMARY KEY(`tg_id`, `ted_id`, `ting_id`), FOREIGN KEY(`tg_id`) REFERENCES `TeachingGroup`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`ted_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`ting_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "tg_id",
+            "columnName": "tg_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ted_id",
+            "columnName": "ted_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ting_id",
+            "columnName": "ting_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "evaluation.content",
+            "columnName": "content",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.attitude",
+            "columnName": "attitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.methods",
+            "columnName": "methods",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.status",
+            "columnName": "status",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.effect",
+            "columnName": "effect",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.times",
+            "columnName": "times",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "tg_id",
+            "ted_id",
+            "ting_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_PeerReview_tg_id",
+            "unique": true,
+            "columnNames": [
+              "tg_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_PeerReview_tg_id` ON `${TABLE_NAME}` (`tg_id`)"
+          },
+          {
+            "name": "index_PeerReview_ted_id",
+            "unique": true,
+            "columnNames": [
+              "ted_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_PeerReview_ted_id` ON `${TABLE_NAME}` (`ted_id`)"
+          },
+          {
+            "name": "index_PeerReview_ting_id",
+            "unique": true,
+            "columnNames": [
+              "ting_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_PeerReview_ting_id` ON `${TABLE_NAME}` (`ting_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "TeachingGroup",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "tg_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Teacher",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "ted_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Teacher",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "ting_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "LeadershipEvaluation",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ted_id` INTEGER NOT NULL, `leader_id` INTEGER NOT NULL, `NumberOfLectures` INTEGER NOT NULL, `content` REAL, `attitude` REAL, `methods` REAL, `status` REAL, `effect` REAL, `times` INTEGER, PRIMARY KEY(`ted_id`, `leader_id`, `NumberOfLectures`), FOREIGN KEY(`ted_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`leader_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "ted_id",
+            "columnName": "ted_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "leader_id",
+            "columnName": "leader_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "NumberOLectures",
+            "columnName": "NumberOfLectures",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "evaluation.content",
+            "columnName": "content",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.attitude",
+            "columnName": "attitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.methods",
+            "columnName": "methods",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.status",
+            "columnName": "status",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.effect",
+            "columnName": "effect",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "evaluation.times",
+            "columnName": "times",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "ted_id",
+            "leader_id",
+            "NumberOfLectures"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_LeadershipEvaluation_ted_id",
+            "unique": true,
+            "columnNames": [
+              "ted_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_LeadershipEvaluation_ted_id` ON `${TABLE_NAME}` (`ted_id`)"
+          },
+          {
+            "name": "index_LeadershipEvaluation_leader_id",
+            "unique": true,
+            "columnNames": [
+              "leader_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_LeadershipEvaluation_leader_id` ON `${TABLE_NAME}` (`leader_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Teacher",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "ted_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Teacher",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "leader_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "Academic",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Academic_name",
+            "unique": true,
+            "columnNames": [
+              "name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_Academic_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"dbfcf2191fcdcbe2a42c336c6a22a841\")"
+    ]
+  }
+}
