@@ -1,4 +1,4 @@
-package com.aierdeliqi.teacherevaluation;
+package com.aierdeliqi.teacherevaluation.mAdapter;
 
 public class Talks {
     private String speaker;

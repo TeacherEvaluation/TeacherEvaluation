@@ -1,4 +1,4 @@
-package com.aierdeliqi.teacherevaluation;
+package com.aierdeliqi.teacherevaluation.mAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.aierdeliqi.teacherevaluation.R;
 
 import java.util.LinkedList;
 
@@ -39,18 +41,21 @@ public class CourseAdapter extends BaseAdapter{
             holder = new ViewHolder();
             holder.tv_coursename = view.findViewById(R.id.tv_coursename);
             holder.tv_teachername = view.findViewById(R.id.tv_teachername);
+            holder.tv_issubmit = view.findViewById(R.id.tv_issubmit);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
         }
         holder.tv_teachername.setText(mData.get(i).getTeacherName());
         holder.tv_coursename.setText(mData.get(i).getCoruseName());
+        holder.tv_issubmit.setText("前往评价");
         return view;
     }
 
     static class ViewHolder{
         TextView tv_coursename;
         TextView tv_teachername;
+        TextView tv_issubmit;
     }
 
 }

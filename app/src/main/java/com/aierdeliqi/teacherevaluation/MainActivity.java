@@ -18,11 +18,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aierdeliqi.teacherevaluation.mAdapter.Coruse;
+import com.aierdeliqi.teacherevaluation.mAdapter.CourseAdapter;
+import com.aierdeliqi.teacherevaluation.mAdapter.TalkAdapter;
+import com.aierdeliqi.teacherevaluation.mAdapter.Talks;
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -35,17 +40,19 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationBar.OnTabSelectedListener ,FloatingActionButton.OnClickListener{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        BottomNavigationBar.OnTabSelectedListener,
+        FloatingActionButton.OnClickListener,AdapterView.OnItemClickListener{
     FloatingActionMenu fm;
     FloatingActionButton fb_1, fb_2, fb_3;
     BottomNavigationBar bottomNavigationBar;
     Banner banner;
-    SwipeRefreshLayout swipeRefresh, swipeRefresh2,swipeRefresh3;
+    SwipeRefreshLayout swipeRefresh, swipeRefresh2, swipeRefresh3;
 
     //main_view
     LinearLayout ll1, ll2, ll3;
 
-    ListView lv,lv_course,lv_search;
+    ListView lv, lv_course, lv_search;
     private LinkedList<Talks> mDataNews = null;
     private LinkedList<Coruse> mDataCourse = null;
     private Context context;
@@ -53,6 +60,9 @@ public class MainActivity extends AppCompatActivity
     private CourseAdapter courseAdapter = null;
 
     TextView info_name, info_sex, info_age, info_zhuanye, info_classes, info_num;
+
+    private final static int REQUEST = 1;
+    private static int lPosition;
 
     public void find() {
         fm = findViewById(R.id.fam);
@@ -168,6 +178,7 @@ public class MainActivity extends AppCompatActivity
                 }, 2000);
             }
         });
+        lv.setOnItemClickListener(this);
 //        First页结束
 
 
@@ -201,6 +212,14 @@ public class MainActivity extends AppCompatActivity
                 }, 2000);
             }
         });
+
+//        lv_course.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        lv_course.setOnItemClickListener(this);
 //        Second页结束
 
 //        Third页开始
@@ -320,12 +339,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     //信息展示动画
-    public void infoAnime(View view){
+    public void infoAnime(View view) {
         Random random = new Random();
-        int rand = random.nextInt(900)+400;
-        ObjectAnimator animator,animator1;
-        animator = ObjectAnimator.ofFloat(view, "scaleX", 0.2f,1).setDuration(rand);
-        animator1 = ObjectAnimator.ofFloat(view, "scaleY", 0.2f,1).setDuration(rand);
+        int rand = random.nextInt(900) + 400;
+        ObjectAnimator animator, animator1;
+        animator = ObjectAnimator.ofFloat(view, "scaleX", 0.2f, 1).setDuration(rand);
+        animator1 = ObjectAnimator.ofFloat(view, "scaleY", 0.2f, 1).setDuration(rand);
         animator.setInterpolator(new DecelerateInterpolator(2f));
         animator1.setInterpolator(new DecelerateInterpolator(2f));
         animator.start();
@@ -362,8 +381,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(this, view.getId()+"", Toast.LENGTH_SHORT).show();
-        switch (view.getId()){
+        Toast.makeText(this, view.getId() + "", Toast.LENGTH_SHORT).show();
+        switch (view.getId()) {
             case R.id.fab_1:
                 infoAnime(info_name);
                 infoAnime(info_sex);
@@ -374,13 +393,37 @@ public class MainActivity extends AppCompatActivity
                 fm.close(true);
                 break;
             case R.id.fab_2:
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.fab_3:
 
                 break;
 
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
+        lPosition = position;
+        if (parent == lv_course){
+            Intent intent = new Intent(MainActivity.this,RankingActivity.class);
+            intent.putExtra("position",position);
+            startActivityForResult(intent,REQUEST);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1){
+            if (requestCode == REQUEST){
+                //已完成评分
+                Toast.makeText(this, "已提交", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "以保存，等待提交", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

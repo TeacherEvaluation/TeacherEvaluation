@@ -28,8 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:theme="@style/AppTheme.login"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.login" />
+        <activity
+            android:name=".RankingActivity"
+            android:label="@string/title_activity_ranking"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
