@@ -10,4 +10,31 @@
     <string name="noaccount">点此修改密码</string>
     <string name="title_activity_ranking">在这里评价</string>
     <string name="submit">提交</string>
+    <string-array name="rankprefer">
+        <item>具体数值评价</item>
+        <item>模糊语言评价</item>
+        <item>区间估计</item>
+        <item>星星评分</item>
+    </string-array>
+    <string-array name="rankingdigit">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="rankinglanguage">
+        <item>优秀</item>
+        <item>良好</item>
+        <item>较好</item>
+        <item>中等</item>
+        <item>较差</item>
+    </string-array>
+    <string-array name="rankingmartrix">
+        <item>[8,10]</item>
+        <item>[6,7]</item>
+        <item>[5,6]</item>
+        <item>[2,4]</item>
+        <item>[0,2]</item>
+    </string-array>
 </resources>

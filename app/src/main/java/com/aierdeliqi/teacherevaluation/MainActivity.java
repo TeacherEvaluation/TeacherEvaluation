@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.aierdeliqi.teacherevaluation.mAdapter.Coruse;
 import com.aierdeliqi.teacherevaluation.mAdapter.CourseAdapter;
+import com.aierdeliqi.teacherevaluation.mAdapter.Ranking;
+import com.aierdeliqi.teacherevaluation.mAdapter.RankingAdapter;
 import com.aierdeliqi.teacherevaluation.mAdapter.TalkAdapter;
 import com.aierdeliqi.teacherevaluation.mAdapter.Talks;
 import com.ashokvarma.bottomnavigation.BadgeItem;
@@ -42,12 +44,20 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         BottomNavigationBar.OnTabSelectedListener,
-        FloatingActionButton.OnClickListener,AdapterView.OnItemClickListener{
+        FloatingActionButton.OnClickListener,
+        AdapterView.OnItemClickListener{
     FloatingActionMenu fm;
     FloatingActionButton fb_1, fb_2, fb_3;
     BottomNavigationBar bottomNavigationBar;
     Banner banner;
     SwipeRefreshLayout swipeRefresh, swipeRefresh2, swipeRefresh3;
+
+    String[] name1 = new String[]{"学生1", "学生2", "学生3", "学生4", "学生3", "学生3", "学生3", "学生3", "学生3"};
+    String[] teacher = new String[]{"教师1", "教师2", "教师3", "教师4", "教师2", "教师2", "教师2", "教师2", "教师2"};
+    String[] times = new String[]{"10分钟前", "12分钟前", "13分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前"};
+    String[] teacherName = new String[]{"赵老师", "钱老师", "孙老师", "李老师", "周老师", "吴老师", "郑老师", "王老师"};
+    String[] courseName = new String[]{"高数", "英语", "大物", "程序设计", "数据结构", "数据库", "网络原理", "软件管理"};
+    String[] rankscore = new String[]{"9.8", "8.7", "8.2", "8.1", "7.6", "7.5", "6", "5.4"};
 
     //main_view
     LinearLayout ll1, ll2, ll3;
@@ -55,9 +65,11 @@ public class MainActivity extends AppCompatActivity
     ListView lv, lv_course, lv_search;
     private LinkedList<Talks> mDataNews = null;
     private LinkedList<Coruse> mDataCourse = null;
+    private LinkedList<Ranking> mDataRank = null;
     private Context context;
     private TalkAdapter talkAdapter = null;
     private CourseAdapter courseAdapter = null;
+    private RankingAdapter rankingAdapter = null;
 
     TextView info_name, info_sex, info_age, info_zhuanye, info_classes, info_num;
 
@@ -153,9 +165,6 @@ public class MainActivity extends AppCompatActivity
                 .setDelayTime(4000)
                 .start();
         //加载链表
-        String[] name1 = new String[]{"学生1", "学生2", "学生3", "学生4", "学生3", "学生3", "学生3", "学生3", "学生3"};
-        String[] teacher = new String[]{"教师1", "教师2", "教师3", "教师4", "教师2", "教师2", "教师2", "教师2", "教师2"};
-        String[] times = new String[]{"10分钟前", "12分钟前", "13分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前", "20分钟前"};
         mDataNews = new LinkedList<>();
         for (int i = 0; i < name1.length; i++) {
             mDataNews.add(new Talks(name1[i], teacher[i], times[i]));
@@ -183,8 +192,6 @@ public class MainActivity extends AppCompatActivity
 
 
 //        Second页开始
-        String[] teacherName = new String[]{"赵老师", "钱老师", "孙老师", "李老师", "周老师", "吴老师", "郑老师", "王老师"};
-        String[] courseName = new String[]{"高数", "英语", "大物", "程序设计", "数据结构", "数据库", "网络原理", "软件管理"};
         mDataCourse = new LinkedList<>();
         for (int i = 0; i < teacherName.length; i++) {
             mDataCourse.add(new Coruse(courseName[i], teacherName[i]));
@@ -223,7 +230,12 @@ public class MainActivity extends AppCompatActivity
 //        Second页结束
 
 //        Third页开始
-
+        mDataRank = new LinkedList<>();
+        for (int i = 0;i<teacherName.length;i++){
+            mDataRank.add(new Ranking(teacherName[i],rankscore[i]));
+        }
+        rankingAdapter = new RankingAdapter(mDataRank,context);
+        lv_search.setAdapter(rankingAdapter);
 //        Third页结束
 
         //浮动按钮
@@ -406,10 +418,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
-        lPosition = position;
+        lPosition = position-1;
         if (parent == lv_course){
             Intent intent = new Intent(MainActivity.this,RankingActivity.class);
-            intent.putExtra("position",position);
+            intent.putExtra("position",lPosition);
+            intent.putExtra("name",teacherName[lPosition]);
             startActivityForResult(intent,REQUEST);
         }
     }

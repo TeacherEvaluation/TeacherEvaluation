@@ -11,11 +11,9 @@
             android:id="@+id/lv_coruse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
             android:divider="@color/touming"
-            android:dividerHeight="10dp"
-            android:paddingBottom="60dp"/>
+            android:dividerHeight="15dp"
+            android:paddingBottom="20dp"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

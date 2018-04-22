@@ -19,9 +19,11 @@
         android:elevation="1dp">
         <ListView
             android:id="@+id/lv_search"
-            android:padding="15dp"
+            android:paddingBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:divider="@color/touming"
+            android:dividerHeight="20dp">
 
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>

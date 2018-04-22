@@ -20,11 +20,10 @@
         android:gravity="fill_vertical"
         android:textSize="20sp"
         android:textColor="@color/white"
-        android:elevation="1dp"
+        android:elevation="4dp"
         android:background="@drawable/titleback"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="下拉刷新"
+        android:layout_height="5dp"
         android:gravity="center"/>
 </LinearLayout>
