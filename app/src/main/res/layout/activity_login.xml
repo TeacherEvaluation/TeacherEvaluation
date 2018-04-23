@@ -5,175 +5,160 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.aierdeliqi.teacherevaluation.LoginActivity"
-    tools:ignore="MissingConstraints"
-    android:background="@drawable/bg_login">
-    <!--登录界面-->
-    <TextView
-        android:id="@+id/tv_title_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
-        android:background="@color/touming"
-        android:text="用户登陆"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
+    android:background="@drawable/loginbackgroundcolor">
+    <ImageButton
+        android:id="@+id/ib_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/card_1"
+        android:layout_marginBottom="240dp"
+        android:elevation="20dp" />
 
-    <EditText
-        android:id="@+id/et_account"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="180dp"
-        android:background="@drawable/edittext_background"
-        android:hint="账号："
-        android:inputType="number"
-        android:paddingLeft="10dp"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/edittext_background"
-        android:hint="密码："
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="500dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginTop="320dp"
-        android:background="@drawable/button_gradientstyle"
-        android:text="登陆"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_noaccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="390dp"
-        android:background="@color/touming"
-        android:text="@string/noaccount"
-        android:textColor="@color/white"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--1/3 size-->
+        <LinearLayout
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/sp_layout"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_face_black_24dp"/>
+                <Spinner
+                    android:background="@drawable/spinnercolor"
+                    android:id="@+id/sp_accountstyle"
+                    android:entries="@array/accountstyle"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="0dp"
+                    android:textColorHint="@color/logincolorfont"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+            <!--账号-->
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_person"/>
+                <EditText
+                    android:id="@+id/et_account"
+                    android:hint="账号:"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="0dp"
+                    android:textColorHint="@color/logincolorfont"
+                    android:textColor="@color/logincolorfont"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+            <!--密码-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_lock"/>
+                <EditText
+                    android:id="@+id/et_password"
+                    android:hint="密码："
+                    android:textColorHint="@color/logincolorfont"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="270dp"
+        app:layout_constraintTop_toTopOf="@+id/card_1"
+        android:layout_gravity="bottom|center"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp">
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="登陆"
+            android:background="@drawable/button_selector"
+            android:textColor="@color/logincolorfont"/>
+    </android.support.v7.widget.CardView>
 
-    <!--注册界面-->
     <TextView
-        android:visibility="invisible"
-        android:id="@+id/tv_title_regist"
+        android:id="@+id/tv_rebuild"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
-        android:background="@color/touming"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="50dp"
         android:text="修改密码"
+        android:elevation="10dp"
         android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="italic"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/card_1" />
 
-    <EditText
-        android:visibility="gone"
-        android:id="@+id/et_account_regist"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="180dp"
-        android:background="@drawable/edittext_background"
-        android:hint="账号："
-        android:inputType="number"
-        android:paddingLeft="10dp"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <CheckBox
+            app:layout_constraintTop_toBottomOf="@id/card_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="记住密码？"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="45dp"
+            android:layout_marginStart="30dp"/>
 
-    <EditText
-        android:visibility="gone"
-        android:id="@+id/et_password_regist"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/edittext_background"
-        android:hint="密码："
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:visibility="gone"
-        android:id="@+id/et_password_reinput"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="320dp"
-        android:background="@drawable/edittext_background"
-        android:hint="确认密码："
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:visibility="gone"
-        android:id="@+id/btn_regist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="390dp"
-        android:background="@drawable/button_gradientstyle"
-        android:text="确认"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--登录界面-->
 
 </android.support.constraint.ConstraintLayout>

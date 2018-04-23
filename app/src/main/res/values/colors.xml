@@ -20,4 +20,7 @@
     <color name="blacksea2">#8253da</color>
     <color name="summergamesgreen">#92fe9d</color>
     <color name="summergamesblue">#00c9ff</color>
+    <color name="logincolorstart">#4a7ad3</color>
+    <color name="logincolorend">#b676c9</color>
+    <color name="logincolorfont">#4e7ad3</color>
 </resources>

@@ -37,4 +37,8 @@
         <item>[2,4]</item>
         <item>[0,2]</item>
     </string-array>
+    <string-array name="accountstyle">
+        <item>学生登陆</item>
+        <item>教师登陆</item>
+    </string-array>
 </resources>
