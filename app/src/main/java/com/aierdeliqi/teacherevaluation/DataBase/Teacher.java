@@ -37,12 +37,12 @@ public class Teacher {
     /*
      * 专业号*/
     @ColumnInfo(name = "p_id")
-    private long p_id;
+    private @NonNull String p_id;
 
     public Teacher() {
     }
     @Ignore
-    public Teacher(@NonNull String id, People people, String leader, long tg_id, long p_id) {
+    public Teacher(@NonNull String id, People people, String leader, long tg_id, String p_id) {
         this.id = id;
         this.people = people;
         this.leader = leader;
@@ -67,11 +67,12 @@ public class Teacher {
         this.tg_id = tg_id;
     }
 
-    public long getP_id() {
+    @NonNull
+    public String getP_id() {
         return p_id;
     }
 
-    public void setP_id(long p_id) {
+    public void setP_id(@NonNull String p_id) {
         this.p_id = p_id;
     }
 
