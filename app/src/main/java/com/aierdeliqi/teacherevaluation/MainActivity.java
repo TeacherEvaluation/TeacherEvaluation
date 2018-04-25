@@ -419,11 +419,11 @@ public class MainActivity extends AppCompatActivity
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
         lPosition = position-1;
-        if (parent == lv_course){
-            Intent intent = new Intent(MainActivity.this,RankingActivity.class);
-            intent.putExtra("position",lPosition);
-            intent.putExtra("name",teacherName[lPosition]);
-            startActivityForResult(intent,REQUEST);
+        if (parent == lv_course&&lPosition!=-1){
+                Intent intent = new Intent(MainActivity.this,RankingActivity.class);
+                intent.putExtra("position",lPosition);
+                intent.putExtra("name", teacherName[lPosition]);
+                startActivityForResult(intent,REQUEST);
         }
     }
 

@@ -13,10 +13,10 @@ public class CreateDB {
         Student student = new Student();
         People people = new People();
         Profession profession = new Profession();
-        profession.setId(01);
+//        profession.setId(01);
         profession.setName("计算机");
         people.setAge(20);
-        people.setName("张荣盛");
+//        people.setName("张荣盛");
         people.setPassword("123456");
         people.setSex("male");
         student.setId("153401010222");

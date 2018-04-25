@@ -2,6 +2,7 @@ package com.aierdeliqi.teacherevaluation;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -79,7 +80,9 @@ public class LoginActivity extends AppCompatActivity implements Spinner.OnItemSe
                 if (account.equals("")){
                     Toast.makeText(this, "请输入账号", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         }
