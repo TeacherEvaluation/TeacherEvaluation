@@ -1,8 +1,11 @@
 package com.aierdeliqi.teacherevaluation;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -17,6 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aierdeliqi.teacherevaluation.DataBase.AppDatabase;
+import com.aierdeliqi.teacherevaluation.DataBase.Student;
+import com.aierdeliqi.teacherevaluation.DataBase.Teacher;
 import com.rey.material.widget.Button;
 
 public class LoginActivity extends AppCompatActivity implements Spinner.OnItemSelectedListener, View.OnClickListener {
@@ -26,8 +32,9 @@ public class LoginActivity extends AppCompatActivity implements Spinner.OnItemSe
     TextView tv_rebuild;
     LinearLayout ll_sp;
     EditText et_account, et_password;
-    boolean state = true;
+    Boolean state = true;
     Button btn_login;
+    Boolean is_update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,49 +62,122 @@ public class LoginActivity extends AppCompatActivity implements Spinner.OnItemSe
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
+    private String account_update=null;//修改密码时临时保存账号
+    @SuppressLint("StaticFieldLeak")
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         if (v.getId() == R.id.tv_rebuild) {
             obanime();
             ll_sp.setVisibility(View.GONE);
             et_account.setHint("修改密码:");
+            account_update=et_account.getText()+"";
+            et_account.setText(null);
             et_password.setHint("再次输入密码:");
             tv_rebuild.setVisibility(View.INVISIBLE);
             btn_login.setText("确认");
+            if(account_update.isEmpty()){
+                Toast.makeText(this,R.string.login_error,Toast.LENGTH_SHORT).show();
+            }
             state = !state;
         }
         else if (v.getId() == R.id.btn_login){
             if (!state) {
-                obanime();
-                ll_sp.setVisibility(View.VISIBLE);
-                et_account.setHint("账号:");
-                et_password.setHint("密码:");
-                btn_login.setText("登陆");
-                tv_rebuild.setVisibility(View.VISIBLE);
-                state = !state;
-            }else {
-                String account = et_account.getText()+"";
-                if (account.equals("")){
-                    Toast.makeText(this, "请输入账号", Toast.LENGTH_SHORT).show();
+                final String password=et_account.getText()+"";
+                String password1=et_password.getText()+"";
+                if(password.equals(password1)) {
+                    final ProgressDialog progressDialog = new ProgressDialog(this);
+                    progressDialog.setTitle(R.string.reset_password);
+                    progressDialog.setMessage(getResources().getString(R.string.logining));
+                    new AsyncTask<Context, Void, Boolean>() {
+                        @Override
+                        protected void onPreExecute() {
+                            progressDialog.show();
+                            super.onPreExecute();
+                        }
+
+                        @Override
+                        protected Boolean doInBackground(Context... contexts) {
+                            if (sp_account.getSelectedItemPosition() == 0) {
+                                Student student = AppDatabase.getInstance(contexts[0]).studentDao().getStudent(account_update);
+                                if (student != null) {
+                                    student.getPeople().setPassword(password);
+                                    AppDatabase.getInstance(contexts[0]).studentDao().updateStudent(student);
+                                    return true;
+                                }
+                            } else {
+                                Teacher teacher = AppDatabase.getInstance(contexts[0]).teacherDao().getTeacher(account_update);
+                                if (teacher != null) {
+                                    teacher.getPeople().setPassword(password);
+                                    AppDatabase.getInstance(contexts[0]).teacherDao().updateTeacher(teacher);
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Boolean aBoolean) {
+                            progressDialog.dismiss();
+                            Toast.makeText(LoginActivity.this, aBoolean ? R.string.update_success : R.string.update_error, Toast.LENGTH_SHORT).show();
+                            super.onPostExecute(aBoolean);
+                        }
+                    }.execute(this);
+                    obanime();
+                    ll_sp.setVisibility(View.VISIBLE);
+                    et_account.setHint("账号:");
+                    et_password.setHint("密码:");
+                    btn_login.setText("登陆");
+                    tv_rebuild.setVisibility(View.VISIBLE);
+                    state = !state;
                 }else {
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Toast.makeText(this,R.string.update_password_error,Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                final String account = et_account.getText()+"";
+                final String password= et_password.getText()+"";
+                if (account.isEmpty()){
+                    Toast.makeText(this, "请输入账号", Toast.LENGTH_SHORT).show();
+                }else if(password.isEmpty()){
+                    Toast.makeText(this,R.string.passwordIsEmptyTip,Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    final ProgressDialog progressDialog=new ProgressDialog(this);
+                    progressDialog.setTitle(R.string.logining);
+                    progressDialog.setMessage(getResources().getString(R.string.waitting));
+                    new AsyncTask<Context,Void,Boolean>(){
+                        @Override
+                        protected void onPreExecute() {
+                            progressDialog.show();
+                            super.onPreExecute();
+                        }
+
+                        @Override
+                        protected Boolean doInBackground(Context... contexts) {
+                            if(sp_account.getSelectedItemPosition()==0)
+                            {
+                                Student student=AppDatabase.getInstance(contexts[0]).studentDao().getStudent(account);
+                                return student != null && student.getPeople().getPassword().equals(password);
+                            }else {
+                                Teacher teacher=AppDatabase.getInstance(contexts[0]).teacherDao().getTeacher(account);
+                                return teacher != null && teacher.getPeople().getPassword().equals(password);
+                            }
+                        }
+
+                        @Override
+                        protected void onPostExecute(Boolean aBoolean) {
+                            progressDialog.dismiss();
+                            Toast.makeText(LoginActivity.this,aBoolean?R.string.login_success:R.string.login_error,Toast.LENGTH_SHORT).show();
+                            if(aBoolean)
+                            {
+                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            }
+                            super.onPostExecute(aBoolean);
+                        }
+                    }.execute(this);
                 }
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
     //extra
     private void findView() {
