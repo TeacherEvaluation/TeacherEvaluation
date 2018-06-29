@@ -4,21 +4,22 @@ import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
-
+/**
+* 评价信息*/
 public class Evaluation {
-    /*
+    /**
     * 评价指标*/
     private @NonNull String index;
-    /*
+    /**
     * 子因素*/
     private @NonNull String sub_factors;
-    /*
+    /**
     * 等级*/
     private @NonNull String grade;
-    /*
+    /**
     * 等级对应的三角模糊数分值*/
     private float value;
-    /*
+    /**
     * 评价时间*/
     private Date times;
 

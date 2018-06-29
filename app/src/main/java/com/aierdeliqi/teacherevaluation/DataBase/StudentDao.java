@@ -17,6 +17,8 @@ public interface StudentDao {
     Student getStudent(@NonNull String Id);
     @Insert
     void insertStudent(Student...students);
+    @Insert
+    void insertStudent(List<Student> studentList);
     @Update
     void updateStudent(Student...students);
     @Delete

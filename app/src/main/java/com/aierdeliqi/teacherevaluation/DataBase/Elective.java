@@ -7,7 +7,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.support.annotation.NonNull;
 
-/*
+/**
 * 选课信息*/
 @Entity(tableName = "Elective",primaryKeys = {"s_id","c_id","t_id","A_id","semester"},
         foreignKeys = {@ForeignKey(entity = Teacher.class,parentColumns = "id",childColumns = "t_id"),
@@ -16,27 +16,27 @@ import android.support.annotation.NonNull;
         indices ={@Index(value = "t_id",unique = true),@Index(value = "c_id",unique = true),
                 @Index(value = "A_id",unique = true),@Index(value = "semester",unique = true)})
 public class Elective {
-    /*
+    /**
     * 学号*/
     @ColumnInfo(name = "s_id")
     private long s_id;
-    /*
+    /**
     * 课程号*/
     @ColumnInfo(name="c_id")
     private long c_id;
-    /*
+    /**
     * 职工号*/
     @ColumnInfo(name="t_id")
     private long t_id;
-    /*
+    /**
     * 学年编号*/
     @ColumnInfo(name = "A_id")
     private long A_id;
-    /*
+    /**
     * 学期*/
     @ColumnInfo(name = "semester")
     private int semester;
-    /*
+    /**
     * 成绩*/
     @ColumnInfo(name = "score")
     private int score;

@@ -20,32 +20,32 @@ import android.support.annotation.NonNull;
         indices = {@Index(value = "c_id",unique = true),@Index(value = "t_id",unique = true),
                 @Index(value = "a_id",unique = true),@Index(value = "semester",unique = true)})
 public class StudentEvaluation {
-    /*
+    /**
     * 学号*/
     @ColumnInfo(name = "s_id")
     @NonNull
     private String s_id;
-    /*
+    /**
     * 课程号*/
     @ColumnInfo(name = "c_id")
     private long c_id;
-    /*
+    /**
     * 职工号*/
     @ColumnInfo(name = "t_id")
     @NonNull
     private String t_id;
-    /*
+    /**
     * 学年编号*/
     private long a_id;
-    /*
+    /**
     * 学期*/
     @ColumnInfo(name = "semester")
     private int semester;
-    /*
+    /**
     * 评价类型：平时、期中和期末其值分别对应0，1，2*/
     @ColumnInfo(name = "evaluation_type")
     private int evaluation_type;
-    /*
+    /**
     * 评价指标*/
     @Embedded
     private Evaluation evaluation;

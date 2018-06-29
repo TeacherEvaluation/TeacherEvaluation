@@ -6,15 +6,15 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-/*
+/**
 * 课程信息*/
 @Entity(tableName = "course")
 public class Course {
-    /*
-    * 课程号*/
+    /**
+    *课程号*/
     @PrimaryKey
     private long id;
-    /*
+    /**
     * 课程名*/
     @ColumnInfo(name = "name")
     private String name;

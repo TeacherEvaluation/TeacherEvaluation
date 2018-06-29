@@ -10,11 +10,11 @@ import android.support.annotation.NonNull;
 * 授课组*/
 @Entity(tableName = "TeachingGroup")
 public class TeachingGroup {
-    /*
+    /**
     * 授课组号*/
     @PrimaryKey
     private long id;
-    /*
+    /**
     * 组名*/
     @ColumnInfo(name = "name")
     private String name;

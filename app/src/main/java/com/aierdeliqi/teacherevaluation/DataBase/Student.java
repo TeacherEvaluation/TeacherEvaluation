@@ -14,20 +14,20 @@ import android.support.annotation.NonNull;
         foreignKeys = {@ForeignKey(entity = Profession.class,parentColumns = "id"
                 ,childColumns = "specialize")},indices = @Index(value = {"specialize"},unique = true))
 public class Student {
-    /*
+    /**
     * 学号*/
     @PrimaryKey
     @NonNull
     private String id;
-    /*
+    /**
     * 个人基础信息*/
     @Embedded
     private People people;
-    /*
+    /**
     * 专业号*/
     @ColumnInfo(name = "specialize")
     private @NonNull String specialize;
-    /*
+    /**
     * 班级*/
     @ColumnInfo(name = "classes")
     private long classes;

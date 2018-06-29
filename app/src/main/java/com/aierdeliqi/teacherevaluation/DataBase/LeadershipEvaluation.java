@@ -8,19 +8,19 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.support.annotation.NonNull;
 
-/*
+/**
 * 领导评价*/
 @Entity(tableName = "LeadershipEvaluation",primaryKeys = {"ted_id","leader_id","NumberOfLectures"}
 ,foreignKeys = {@ForeignKey(entity = Teacher.class,parentColumns = "id",childColumns = "ted_id"),
 @ForeignKey(entity = Teacher.class,parentColumns = "id",childColumns = "leader_id")},indices ={
 @Index(value = {"ted_id"},unique = true),@Index(value = "leader_id",unique = true)})
 public class LeadershipEvaluation {
-    /*
+    /**
     * 被听课教师职工号*/
     @ColumnInfo(name = "ted_id")
     @NonNull
     private String ted_id;
-    /*
+    /**
     * 领导职工号*/
     @ColumnInfo(name = "leader_id")
     @NonNull
@@ -36,11 +36,11 @@ public class LeadershipEvaluation {
         this.evaluation = evaluation;
     }
 
-    /*
+    /**
     * 听课次数*/
     @ColumnInfo(name = "NumberOfLectures")
     private int NumberOLectures;
-    /*
+    /**
     * 评价指标*/
     @Embedded
     private Evaluation evaluation;

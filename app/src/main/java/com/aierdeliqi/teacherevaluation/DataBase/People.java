@@ -5,34 +5,34 @@ import android.arch.persistence.room.Ignore;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
-/*
+/**
 * 个人基本信息*/
 public class People {
-    /*
+    /**
      * 姓名中的第一个字：姓*/
     @NonNull
     @ColumnInfo(name="first_name")
     private String first_name;
-    /*
-    * @Parameter
+    /**
     * 姓名中的后几个字*/
     @NonNull
     @ColumnInfo(name = "last_name")
     private String last_name;
-    /*
+    /**
      * 性别*/
     @ColumnInfo(name = "sex")
     private String sex;
-    /*
+    /**
     * 头像*/
     @Ignore
     @ColumnInfo(name = "head")
     private Bitmap head;
-    /*
+    /**
      * 密码*/
+    @NonNull
     @ColumnInfo(name = "password")
     private String password;
-    /*
+    /**
      * 年龄*/
     @ColumnInfo(name = "age")
     private int age;
@@ -83,11 +83,12 @@ public class People {
         this.sex = sex;
     }
 
+    @NonNull
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NonNull String password) {
         this.password = password;
     }
 

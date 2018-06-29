@@ -11,12 +11,12 @@ import android.support.annotation.NonNull;
 * 学年*/
 @Entity(tableName = "Academic",indices = @Index(value = "name",unique = true))
 public class Academic {
-    /*
-    * 学年编号*/
+    /**
+    * id ：学年编号*/
     @PrimaryKey(autoGenerate = true)
     private long id;
-    /*
-    * 具体学年,格式为：yyyy-yyyy,例如：2016-2017*/
+    /**
+    * name:具体学年,格式为：yyyy-yyyy,例如：2016-2017*/
     @ColumnInfo(name = "name")
     private String name;
 

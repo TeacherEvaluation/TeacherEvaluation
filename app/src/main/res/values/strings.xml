@@ -10,6 +10,15 @@
     <string name="noaccount">点此修改密码</string>
     <string name="title_activity_ranking">在这里评价</string>
     <string name="submit">提交</string>
+    <string name="passwordIsEmptyTip">请输入密码！</string>
+    <string name="login_error">用户不存在或您输入的密码有误！请重新输入或注册新账户！</string>
+    <string name="login_success">登陆成功！正在跳转，请稍等！</string>
+    <string name="logining">登录等待</string>
+    <string name="waitting">请稍等.......</string>
+    <string name="reset_password">修改密码</string>
+    <string name="update_success">恭喜你！密码修改完成！</string>
+    <string name="update_error">很遗憾！您的输入有误，请重新输入！</string>
+    <string name="update_password_error">两次输入的密码不一致！请重新输入！</string>
     <string-array name="rankprefer">
         <item>具体数值评价</item>
         <item>模糊语言评价</item>

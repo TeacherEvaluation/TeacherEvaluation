@@ -8,7 +8,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.support.annotation.NonNull;
 
-/*
+/**
 * 同行评价*/
 @Entity(tableName = "PeerReview",primaryKeys = {"tg_id","ted_id","ting_id"},foreignKeys = {
         @ForeignKey(entity = TeachingGroup.class,parentColumns = "id",childColumns = "tg_id"),
@@ -17,19 +17,19 @@ import android.support.annotation.NonNull;
         indices = {@Index(value = "tg_id",unique = true),@Index(value = "ted_id",unique = true),
         @Index(value = "ting_id",unique = true)})
 public class PeerReview {
-    /*
+    /**
     * 授课组号*/
     @ColumnInfo(name = "tg_id")
     private long tg_id;
-    /*
+    /**
     * 被评人职工号*/
     @ColumnInfo(name = "ted_id")
     private @NonNull String ted_id;
-    /*
+    /**
     * 评价人职工号*/
     @ColumnInfo(name = "ting_id")
     private @NonNull String ting_id;
-    /*
+    /**
     * 评价指标*/
     @Embedded
     private Evaluation evaluation;
