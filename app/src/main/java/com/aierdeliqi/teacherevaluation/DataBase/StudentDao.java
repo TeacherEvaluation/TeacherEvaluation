@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface StudentDao {
     @Query("select * from Student")
     List<Student> getAll();
     @Query("select * from Student where id=:Id")
-    Student getStudent(long Id);
+    Student getStudent(@NonNull String Id);
     @Insert
     void insertStudent(Student...students);
     @Update

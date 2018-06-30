@@ -23,7 +23,8 @@ public class StudentEvaluation {
     /*
     * 学号*/
     @ColumnInfo(name = "s_id")
-    private long s_id;
+    @NonNull
+    private String s_id;
     /*
     * 课程号*/
     @ColumnInfo(name = "c_id")
@@ -31,7 +32,8 @@ public class StudentEvaluation {
     /*
     * 职工号*/
     @ColumnInfo(name = "t_id")
-    private long t_id;
+    @NonNull
+    private String t_id;
     /*
     * 学年编号*/
     private long a_id;
@@ -51,7 +53,7 @@ public class StudentEvaluation {
     public StudentEvaluation() {
     }
     @Ignore
-    public StudentEvaluation(long s_id, long c_id, long t_id, long a_id, int semester, int evaluation_type, Evaluation evaluation) {
+    public StudentEvaluation(@NonNull String s_id, long c_id, @NonNull String t_id, long a_id, int semester, int evaluation_type, Evaluation evaluation) {
         this.s_id = s_id;
         this.c_id = c_id;
         this.t_id = t_id;
@@ -61,11 +63,12 @@ public class StudentEvaluation {
         this.evaluation = evaluation;
     }
 
-    public long getS_id() {
+    @NonNull
+    public String getS_id() {
         return s_id;
     }
 
-    public void setS_id(long s_id) {
+    public void setS_id(@NonNull String s_id) {
         this.s_id = s_id;
     }
 
@@ -77,11 +80,12 @@ public class StudentEvaluation {
         this.c_id = c_id;
     }
 
-    public long getT_id() {
+    @NonNull
+    public String getT_id() {
         return t_id;
     }
 
-    public void setT_id(long t_id) {
+    public void setT_id(String t_id) {
         this.t_id = t_id;
     }
 

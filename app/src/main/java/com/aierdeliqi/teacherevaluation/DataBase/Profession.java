@@ -3,7 +3,6 @@ package com.aierdeliqi.teacherevaluation.DataBase;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -14,7 +13,8 @@ public class Profession {
     /*
     * 专业号*/
     @PrimaryKey
-    private long id;
+    @NonNull
+    private String id;
     /*
     * 专业名*/
     @ColumnInfo(name = "name")
@@ -23,16 +23,17 @@ public class Profession {
     public Profession() {
     }
     @Ignore
-    public Profession(long id, @NonNull String name) {
+    public Profession(@NonNull String id, @NonNull String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    @NonNull
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 

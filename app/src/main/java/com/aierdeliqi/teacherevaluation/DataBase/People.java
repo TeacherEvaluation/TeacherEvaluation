@@ -9,9 +9,16 @@ import android.support.annotation.NonNull;
 * 个人基本信息*/
 public class People {
     /*
-     * 姓名*/
-    @ColumnInfo(name="name")
-    private String name;
+     * 姓名中的第一个字：姓*/
+    @NonNull
+    @ColumnInfo(name="first_name")
+    private String first_name;
+    /*
+    * @Parameter
+    * 姓名中的后几个字*/
+    @NonNull
+    @ColumnInfo(name = "last_name")
+    private String last_name;
     /*
      * 性别*/
     @ColumnInfo(name = "sex")
@@ -33,20 +40,31 @@ public class People {
     public People() {
     }
     @Ignore
-    public People(@NonNull String name, String sex, Bitmap head, @NonNull String password, int age) {
-        this.name = name;
+    public People(@NonNull String first_name, @NonNull String last_name, String sex, Bitmap head, String password, int age) {
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.sex = sex;
         this.head = head;
         this.password = password;
         this.age = age;
     }
 
-    public String getName() {
-        return name;
+    @NonNull
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirst_name(@NonNull String first_name) {
+        this.first_name = first_name;
+    }
+
+    @NonNull
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(@NonNull String last_name) {
+        this.last_name = last_name;
     }
 
     public Bitmap getHead() {

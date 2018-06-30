@@ -29,8 +29,10 @@ public abstract class AppDatabase extends RoomDatabase {
         if(instance==null) {
             synchronized (AppDatabase.class) {
                 if (instance==null){
+                    /*
+                    * TODO:调试时的调用，发布时应删除allowMainThreadQueries()方法*/
                     instance= Room.databaseBuilder(context,AppDatabase.class,"Teacher" +
-                            "Evaluation").build();
+                            "Evaluation").allowMainThreadQueries().build();
                 }
             }
         }
@@ -39,7 +41,7 @@ public abstract class AppDatabase extends RoomDatabase {
     /*
     * 关闭数据接口*/
     public static void onDestroy(){
-        instance=null;
+        if(instance!=null) instance.close();
     }
     /*
     * 防止序列化破解单例*/

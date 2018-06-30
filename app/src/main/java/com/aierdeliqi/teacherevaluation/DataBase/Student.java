@@ -26,7 +26,7 @@ public class Student {
     /*
     * 专业号*/
     @ColumnInfo(name = "specialize")
-    private long specialize;
+    private @NonNull String specialize;
     /*
     * 班级*/
     @ColumnInfo(name = "classes")
@@ -35,18 +35,19 @@ public class Student {
     public Student() {
     }
     @Ignore
-    public Student(String id, People people, long specialize, long classes) {
+    public Student(@NonNull String id, People people, String specialize, long classes) {
         this.id = id;
         this.people = people;
         this.specialize = specialize;
         this.classes = classes;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -58,11 +59,12 @@ public class Student {
         this.people = people;
     }
 
-    public long getSpecialize() {
+    @NonNull
+    public String getSpecialize() {
         return specialize;
     }
 
-    public void setSpecialize(long specialize) {
+    public void setSpecialize(@NonNull String specialize) {
         this.specialize = specialize;
     }
 

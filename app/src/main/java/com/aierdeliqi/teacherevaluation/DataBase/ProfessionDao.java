@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface ProfessionDao {
     @Query("select * from Profession")
     List<Profession>getAll();
     @Query("select * from Profession where id=:Id")
-    Profession getProfession(long Id);
+    Profession getProfession(@NonNull String Id);
     @Insert
     void insertProfession(Profession...professions);
     @Update

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "dbfcf2191fcdcbe2a42c336c6a22a841",
+    "identityHash": "318b8abac20812c69cb341507553702a",
     "entities": [
       {
         "tableName": "course",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "Student",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `specialize` INTEGER NOT NULL, `classes` INTEGER NOT NULL, `name` TEXT, `sex` TEXT, `password` TEXT, `age` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`specialize`) REFERENCES `Profession`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `specialize` TEXT NOT NULL, `classes` INTEGER NOT NULL, `first_name` TEXT, `last_name` TEXT, `sex` TEXT, `password` TEXT, `age` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`specialize`) REFERENCES `Profession`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -43,7 +43,7 @@
           {
             "fieldPath": "specialize",
             "columnName": "specialize",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -53,8 +53,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "people.name",
-            "columnName": "name",
+            "fieldPath": "people.first_name",
+            "columnName": "first_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.last_name",
+            "columnName": "last_name",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -109,12 +115,12 @@
       },
       {
         "tableName": "Profession",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -135,19 +141,19 @@
       },
       {
         "tableName": "Teacher",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `leader` INTEGER NOT NULL, `tg_id` INTEGER NOT NULL, `p_id` INTEGER NOT NULL, `name` TEXT, `sex` TEXT, `password` TEXT, `age` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`leader`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`tg_id`) REFERENCES `TeachingGroup`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`p_id`) REFERENCES `Profession`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `leader` TEXT, `tg_id` INTEGER NOT NULL, `p_id` TEXT NOT NULL, `first_name` TEXT, `last_name` TEXT, `sex` TEXT, `password` TEXT, `age` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`leader`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`tg_id`) REFERENCES `TeachingGroup`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`p_id`) REFERENCES `Profession`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "leader",
             "columnName": "leader",
-            "affinity": "INTEGER",
-            "notNull": true
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "tg_id",
@@ -158,12 +164,18 @@
           {
             "fieldPath": "p_id",
             "columnName": "p_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "people.name",
-            "columnName": "name",
+            "fieldPath": "people.first_name",
+            "columnName": "first_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "people.last_name",
+            "columnName": "last_name",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -290,12 +302,12 @@
       },
       {
         "tableName": "StudentEvaluation",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`s_id` INTEGER NOT NULL, `c_id` INTEGER NOT NULL, `t_id` INTEGER NOT NULL, `a_id` INTEGER NOT NULL, `semester` INTEGER NOT NULL, `evaluation_type` INTEGER NOT NULL, `content` REAL, `attitude` REAL, `methods` REAL, `status` REAL, `effect` REAL, `times` INTEGER, PRIMARY KEY(`s_id`, `c_id`, `t_id`, `a_id`, `semester`, `evaluation_type`), FOREIGN KEY(`s_id`) REFERENCES `Student`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`c_id`) REFERENCES `course`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`t_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`a_id`) REFERENCES `Academic`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`semester`) REFERENCES `Elective`(`semester`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`s_id` TEXT NOT NULL, `c_id` INTEGER NOT NULL, `t_id` TEXT NOT NULL, `a_id` INTEGER NOT NULL, `semester` INTEGER NOT NULL, `evaluation_type` INTEGER NOT NULL, `index` TEXT, `sub_factors` TEXT, `grade` TEXT, `value` REAL, `times` INTEGER, PRIMARY KEY(`s_id`, `c_id`, `t_id`, `a_id`, `semester`, `evaluation_type`), FOREIGN KEY(`s_id`) REFERENCES `Student`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`c_id`) REFERENCES `course`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`t_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`a_id`) REFERENCES `Academic`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`semester`) REFERENCES `Elective`(`semester`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "s_id",
             "columnName": "s_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -307,7 +319,7 @@
           {
             "fieldPath": "t_id",
             "columnName": "t_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -329,32 +341,26 @@
             "notNull": true
           },
           {
-            "fieldPath": "evaluation.content",
-            "columnName": "content",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.index",
+            "columnName": "index",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.attitude",
-            "columnName": "attitude",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.sub_factors",
+            "columnName": "sub_factors",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.methods",
-            "columnName": "methods",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.grade",
+            "columnName": "grade",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.status",
-            "columnName": "status",
-            "affinity": "REAL",
-            "notNull": false
-          },
-          {
-            "fieldPath": "evaluation.effect",
-            "columnName": "effect",
+            "fieldPath": "evaluation.value",
+            "columnName": "value",
             "affinity": "REAL",
             "notNull": false
           },
@@ -591,7 +597,7 @@
       },
       {
         "tableName": "PeerReview",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tg_id` INTEGER NOT NULL, `ted_id` INTEGER NOT NULL, `ting_id` INTEGER NOT NULL, `content` REAL, `attitude` REAL, `methods` REAL, `status` REAL, `effect` REAL, `times` INTEGER, PRIMARY KEY(`tg_id`, `ted_id`, `ting_id`), FOREIGN KEY(`tg_id`) REFERENCES `TeachingGroup`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`ted_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`ting_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tg_id` INTEGER NOT NULL, `ted_id` TEXT NOT NULL, `ting_id` TEXT NOT NULL, `index` TEXT, `sub_factors` TEXT, `grade` TEXT, `value` REAL, `times` INTEGER, PRIMARY KEY(`tg_id`, `ted_id`, `ting_id`), FOREIGN KEY(`tg_id`) REFERENCES `TeachingGroup`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`ted_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`ting_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "tg_id",
@@ -602,42 +608,36 @@
           {
             "fieldPath": "ted_id",
             "columnName": "ted_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "ting_id",
             "columnName": "ting_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "evaluation.content",
-            "columnName": "content",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.index",
+            "columnName": "index",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.attitude",
-            "columnName": "attitude",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.sub_factors",
+            "columnName": "sub_factors",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.methods",
-            "columnName": "methods",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.grade",
+            "columnName": "grade",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.status",
-            "columnName": "status",
-            "affinity": "REAL",
-            "notNull": false
-          },
-          {
-            "fieldPath": "evaluation.effect",
-            "columnName": "effect",
+            "fieldPath": "evaluation.value",
+            "columnName": "value",
             "affinity": "REAL",
             "notNull": false
           },
@@ -720,18 +720,18 @@
       },
       {
         "tableName": "LeadershipEvaluation",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ted_id` INTEGER NOT NULL, `leader_id` INTEGER NOT NULL, `NumberOfLectures` INTEGER NOT NULL, `content` REAL, `attitude` REAL, `methods` REAL, `status` REAL, `effect` REAL, `times` INTEGER, PRIMARY KEY(`ted_id`, `leader_id`, `NumberOfLectures`), FOREIGN KEY(`ted_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`leader_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ted_id` TEXT NOT NULL, `leader_id` TEXT NOT NULL, `NumberOfLectures` INTEGER NOT NULL, `index` TEXT, `sub_factors` TEXT, `grade` TEXT, `value` REAL, `times` INTEGER, PRIMARY KEY(`ted_id`, `leader_id`, `NumberOfLectures`), FOREIGN KEY(`ted_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`leader_id`) REFERENCES `Teacher`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "ted_id",
             "columnName": "ted_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "leader_id",
             "columnName": "leader_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -741,32 +741,26 @@
             "notNull": true
           },
           {
-            "fieldPath": "evaluation.content",
-            "columnName": "content",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.index",
+            "columnName": "index",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.attitude",
-            "columnName": "attitude",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.sub_factors",
+            "columnName": "sub_factors",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.methods",
-            "columnName": "methods",
-            "affinity": "REAL",
+            "fieldPath": "evaluation.grade",
+            "columnName": "grade",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "evaluation.status",
-            "columnName": "status",
-            "affinity": "REAL",
-            "notNull": false
-          },
-          {
-            "fieldPath": "evaluation.effect",
-            "columnName": "effect",
+            "fieldPath": "evaluation.value",
+            "columnName": "value",
             "affinity": "REAL",
             "notNull": false
           },
@@ -866,7 +860,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"dbfcf2191fcdcbe2a42c336c6a22a841\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"318b8abac20812c69cb341507553702a\")"
     ]
   }
 }

@@ -1,6 +1,5 @@
 package com.aierdeliqi.teacherevaluation.DataBase;
 
-import android.arch.persistence.room.BuildConfig;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
@@ -21,7 +20,8 @@ public class Teacher {
     /*
     * 职工号*/
     @PrimaryKey
-    private long id;
+    @NonNull
+    private String  id;
     /*
     * 个人基本信息*/
     @Embedded
@@ -29,7 +29,7 @@ public class Teacher {
     /*
      * 上一级领导*/
     @ColumnInfo(name = "leader")
-    private long leader;
+    private String leader;
     /*
      * 授课组号*/
     @ColumnInfo(name = "tg_id")
@@ -37,12 +37,12 @@ public class Teacher {
     /*
      * 专业号*/
     @ColumnInfo(name = "p_id")
-    private long p_id;
+    private @NonNull String p_id;
 
     public Teacher() {
     }
     @Ignore
-    public Teacher(long id, People people, long leader, long tg_id, long p_id) {
+    public Teacher(@NonNull String id, People people, String leader, long tg_id, String p_id) {
         this.id = id;
         this.people = people;
         this.leader = leader;
@@ -50,11 +50,12 @@ public class Teacher {
         this.p_id = p_id;
     }
 
-    public long getId() {
+    @NonNull
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -66,19 +67,20 @@ public class Teacher {
         this.tg_id = tg_id;
     }
 
-    public long getP_id() {
+    @NonNull
+    public String getP_id() {
         return p_id;
     }
 
-    public void setP_id(long p_id) {
+    public void setP_id(@NonNull String p_id) {
         this.p_id = p_id;
     }
 
-    public long getLeader() {
+    public String getLeader() {
         return leader;
     }
 
-    public void setLeader(long leader) {
+    public void setLeader(String leader) {
         this.leader = leader;
     }
 

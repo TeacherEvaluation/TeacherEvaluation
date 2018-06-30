@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface LeadershipEvaluationDao {
     List<LeadershipEvaluation>getAll();
     @Query("select * from LeadershipEvaluation where ted_id=:ted_Id and leader_id=:leader_Id" +
             " and NumberOfLectures=:numberOfLectures")
-    LeadershipEvaluation getLeadershipEvaluation(long ted_Id,long leader_Id,int numberOfLectures);
+    LeadershipEvaluation getLeadershipEvaluation(@NonNull String ted_Id,@NonNull String leader_Id, int numberOfLectures);
     @Insert
     void insertLeadershipEvaluation(LeadershipEvaluation...leadershipEvaluations);
     @Delete

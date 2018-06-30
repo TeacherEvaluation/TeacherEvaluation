@@ -1,11 +1,12 @@
 package com.aierdeliqi.teacherevaluation.DataBase;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 /*
 * 同行评价*/
@@ -18,13 +19,16 @@ import android.arch.persistence.room.PrimaryKey;
 public class PeerReview {
     /*
     * 授课组号*/
+    @ColumnInfo(name = "tg_id")
     private long tg_id;
     /*
     * 被评人职工号*/
-    private long ted_id;
+    @ColumnInfo(name = "ted_id")
+    private @NonNull String ted_id;
     /*
     * 评价人职工号*/
-    private long ting_id;
+    @ColumnInfo(name = "ting_id")
+    private @NonNull String ting_id;
     /*
     * 评价指标*/
     @Embedded
@@ -33,7 +37,7 @@ public class PeerReview {
     public PeerReview() {
     }
     @Ignore
-    public PeerReview(long tg_id, long ted_id, long ting_id, Evaluation evaluation) {
+    public PeerReview(long tg_id, @NonNull String ted_id, @NonNull String ting_id, Evaluation evaluation) {
         this.tg_id = tg_id;
         this.ted_id = ted_id;
         this.ting_id = ting_id;
@@ -48,19 +52,21 @@ public class PeerReview {
         this.tg_id = tg_id;
     }
 
-    public long getTed_id() {
+    @NonNull
+    public String getTed_id() {
         return ted_id;
     }
 
-    public void setTed_id(long ted_id) {
+    public void setTed_id(@NonNull String ted_id) {
         this.ted_id = ted_id;
     }
 
-    public long getTing_id() {
+    @NonNull
+    public String getTing_id() {
         return ting_id;
     }
 
-    public void setTing_id(long ting_id) {
+    public void setTing_id(@NonNull String ting_id) {
         this.ting_id = ting_id;
     }
 
