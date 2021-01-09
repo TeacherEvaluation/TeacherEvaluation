@@ -1,7 +1,7 @@
 package com.aierdeliqi.teacherevaluation.DataBase;
 
-import android.arch.persistence.room.Ignore;
-import android.support.annotation.NonNull;
+import androidx.room.Ignore;
+import androidx.annotation.NonNull;
 
 import java.util.Date;
 /**

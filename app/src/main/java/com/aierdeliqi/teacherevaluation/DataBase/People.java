@@ -1,9 +1,9 @@
 package com.aierdeliqi.teacherevaluation.DataBase;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Ignore;
+import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
 * 个人基本信息*/
