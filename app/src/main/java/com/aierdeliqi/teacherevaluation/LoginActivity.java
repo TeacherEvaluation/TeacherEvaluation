@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -156,10 +156,12 @@ public class LoginActivity extends AppCompatActivity implements Spinner.OnItemSe
                             if(sp_account.getSelectedItemPosition()==0)
                             {
                                 Student student=AppDatabase.getInstance(contexts[0]).studentDao().getStudent(account);
-                                return student != null && student.getPeople().getPassword().equals(password);
+                                return account.equals("root") && password.equals("123456");//TODO:测试账号
+//                                return student != null && student.getPeople().getPassword().equals(password);
                             }else {
                                 Teacher teacher=AppDatabase.getInstance(contexts[0]).teacherDao().getTeacher(account);
-                                return teacher != null && teacher.getPeople().getPassword().equals(password);
+//                                return teacher != null && teacher.getPeople().getPassword().equals(password);
+                                return account.equals("root") && password.equals("123456");//TODO:测试账号
                             }
                         }
 

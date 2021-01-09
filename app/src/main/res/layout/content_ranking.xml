@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".RankingActivity"
-    tools:showIn="@layout/activity_ranking">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                                   tools:context=".RankingActivity"
+                                                   tools:showIn="@layout/activity_ranking">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,33 +15,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:cardCornerRadius="6dp"
                 android:layout_margin="10dp"
                 app:cardElevation="4dp">
                 <!--head-->
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:adjustViewBounds="true"
-                        android:cropToPadding="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/liberary"
-                        android:visibility="visible" />
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:adjustViewBounds="true"
+                            android:cropToPadding="true"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/liberary"
+                            android:visibility="visible" />
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/headimg"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/headimg"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
                     <TextView
                         android:id="@+id/rank_teachername"
                         android:gravity="center"
@@ -52,11 +52,11 @@
                         android:textSize="20dp"
                         android:paddingBottom="10dp"
                         android:textColor="@color/lemontgreen"/>
-                </android.support.constraint.ConstraintLayout>
-            </android.support.v7.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <!--偏好-->
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 app:cardCornerRadius="6dp"
@@ -81,9 +81,9 @@
                         android:entries="@array/rankprefer">
                     </Spinner>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="6dp"
@@ -257,10 +257,10 @@
                     </LinearLayout>
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

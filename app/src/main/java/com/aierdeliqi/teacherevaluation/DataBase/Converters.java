@@ -1,6 +1,6 @@
 package com.aierdeliqi.teacherevaluation.DataBase;
 
-import android.arch.persistence.room.TypeConverter;
+import androidx.room.TypeConverter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
